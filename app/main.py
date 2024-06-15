@@ -10,6 +10,12 @@ maxlen=189
 model=tensorflow.keras.models.load_model('model.h5')
 tokenizer = pickle.load(open('Tokenizer.pkl', 'rb'))
 
+@App.get('/')
+def default():
+    return {
+        'msg' : 'The App started'
+    }
+
 @App.post('/')
 def spamDetector(msg: str):
     inp = np.array([msg])
