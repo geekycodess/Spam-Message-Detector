@@ -1,13 +1,16 @@
 import pickle
-import tensorflow
-from keras.utils import pad_sequences
+import keras
+import tensorflow as tf
 from fastapi import FastAPI 
-import numpy as np
+
+path = 'model.keras'
+model=tf.keras.models.load_model(path)
+
 
 App = FastAPI()
 maxlen=189
 
-model=tensorflow.keras.models.load_model('model.h5')
+
 tokenizer = pickle.load(open('Tokenizer.pkl', 'rb'))
 
 @App.get('/')
@@ -18,9 +21,9 @@ def default():
 
 @App.post('/')
 def spamDetector(msg: str):
-    inp = np.array([msg])
+    inp = [msg]
     tokenized=tokenizer.texts_to_sequences(inp)
-    padded = pad_sequences(tokenized, maxlen)
+    padded = keras.utils.pad_sequences(tokenized, maxlen)
 
     pred = model.predict(padded, verbose=0)
 

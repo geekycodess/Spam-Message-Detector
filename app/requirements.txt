@@ -1,5 +1,5 @@
-tensorflow
-numpy
 fastapi
-uvicorn
-keras
+uvicorn        
+keras                                       
+keras-preprocessing                          
+tensorflow==2.16.1                        
