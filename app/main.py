@@ -1,10 +1,11 @@
 import pickle
 import keras
-import tensorflow as tf
+import tensorflow as ts
 from fastapi import FastAPI 
 
 path = 'model.keras'
 model=tf.keras.models.load_model(path)
+
 
 
 App = FastAPI()
